@@ -23,7 +23,12 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
+builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
+    p.WithOrigins("https://animated-baklava-6f5ce3.netlify.app/")
+     .AllowAnyHeader().AllowAnyMethod()));
+
 var app = builder.Build();
+app.UseCors();
 
 // Auto-migrate and seed on startup
 using (var scope = app.Services.CreateScope())
