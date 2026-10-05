@@ -18,17 +18,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins(
+            "http://localhost:3000",
+            "https://animated-baklava-6f5ce3.netlify.app")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
 
-builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
-    p.WithOrigins("https://animated-baklava-6f5ce3.netlify.app")
-     .AllowAnyHeader().AllowAnyMethod()));
-
 var app = builder.Build();
-app.UseCors();
 
 // Auto-migrate and seed on startup
 using (var scope = app.Services.CreateScope())
@@ -42,7 +39,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-    app.UseHttpsRedirection();
 }
 
 app.UseStaticFiles();
