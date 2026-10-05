@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
-    p.WithOrigins("https://animated-baklava-6f5ce3.netlify.app/")
+    p.WithOrigins("https://animated-baklava-6f5ce3.netlify.app")
      .AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
